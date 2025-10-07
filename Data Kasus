@@ -1,0 +1,1095 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Format Pelayanan Responsif</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body {
+            box-sizing: border-box;
+        }
+        .form-section {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+    </style>
+</head>
+<body class="bg-gray-50 min-h-screen py-8">
+    <!-- Password Protection Screen -->
+    <div id="passwordScreen" class="min-h-screen flex items-center justify-center">
+        <div class="bg-white rounded-xl shadow-xl p-8 max-w-md w-full mx-4">
+            <div class="text-center mb-8">
+                <div class="form-section text-white rounded-xl p-6 mb-6">
+                    <h1 class="text-2xl font-bold mb-2">🔒 AKSES TERBATAS</h1>
+                    <h2 class="text-lg font-semibold">Format Pelayanan Responsif</h2>
+                    <p class="text-blue-100 text-sm mt-2">SMP Negeri 2 Bangko</p>
+                </div>
+                <p class="text-gray-600 mb-6">Masukkan password untuk mengakses sistem dokumentasi kasus siswa</p>
+            </div>
+            
+            <form id="passwordForm" class="space-y-6">
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-2">Password *</label>
+                    <input type="password" id="passwordInput" required 
+                           placeholder="Masukkan password..."
+                           class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all text-center text-lg">
+                </div>
+                
+                <button type="submit" 
+                        class="w-full bg-gradient-to-r from-blue-600 to-purple-600 text-white py-3 px-6 rounded-lg font-semibold hover:from-blue-700 hover:to-purple-700 transform hover:scale-105 transition-all duration-200 shadow-lg">
+                    🔓 Masuk ke Sistem
+                </button>
+                
+                <div id="passwordError" class="hidden text-red-600 text-center text-sm bg-red-50 p-3 rounded-lg">
+                    ❌ Password salah! Silakan coba lagi.
+                </div>
+            </form>
+            
+            <div class="mt-8 text-center text-xs text-gray-500">
+                <p>Sistem ini hanya dapat diakses oleh petugas BK yang berwenang</p>
+                <p class="mt-2">Dirancang oleh: <strong>Rizki Sukma</strong></p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Application (Hidden by default) -->
+    <div id="mainApplication" class="hidden max-w-4xl mx-auto px-4">
+        <!-- Header -->
+        <div class="form-section text-white rounded-t-xl p-8 mb-0">
+            <h1 class="text-3xl font-bold text-center mb-2">PROGRAM BIMBINGAN DAN KONSELING</h1>
+            <h2 class="text-2xl font-semibold text-center mb-2">SMP Negeri 2 Bangko</h2>
+            <h3 class="text-xl font-semibold text-center mb-2">📋 Format Pelayanan Responsif</h3>
+            <p class="text-center text-blue-100">Dokumentasi dan Penanganan Kasus Siswa (Buku Kasus)</p>
+            <p class="text-center text-blue-200 text-sm mt-3">Dirancang oleh: <strong>Rizki Sukma</strong></p>
+        </div>
+
+        <!-- Form Container -->
+        <div class="bg-white rounded-b-xl shadow-xl p-8">
+            <form id="studentCaseForm" class="space-y-8">
+                <!-- Identitas -->
+                <div class="border-l-4 border-blue-500 pl-6">
+                    <h2 class="text-xl font-semibold text-gray-800 mb-6 flex items-center">
+                        👤 Identitas
+                    </h2>
+                    <div class="grid md:grid-cols-2 gap-6">
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">Nama Lengkap *</label>
+                            <input type="text" id="namaLengkap" required 
+                                   class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">NIS/NISN</label>
+                            <input type="text" id="nis" 
+                                   class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">Kelas *</label>
+                            <input type="text" id="kelas" required 
+                                   placeholder="Contoh: 8.2"
+                                   class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">Jenis Kelamin *</label>
+                            <select id="jenisKelamin" required 
+                                    class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all">
+                                <option value="">Pilih Jenis Kelamin</option>
+                                <option value="Laki-laki">Laki-laki</option>
+                                <option value="Perempuan">Perempuan</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">Nama Guru BK Kelas</label>
+                            <input type="text" id="namaGuruBK" 
+                                   class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">Konselor/Fasilitator</label>
+                            <input type="text" id="konselorFasilitator" 
+                                   class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">Koordinator BK</label>
+                            <input type="text" id="koordinatorBK" 
+                                   class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">Nama Wali Kelas</label>
+                            <input type="text" id="namaWaliKelas" 
+                                   class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Data Kasus -->
+                <div class="border-l-4 border-red-500 pl-6">
+                    <h2 class="text-xl font-semibold text-gray-800 mb-6 flex items-center">
+                        ⚠️ Data Kasus
+                    </h2>
+                    <div class="space-y-6">
+                        <div class="grid md:grid-cols-2 gap-6">
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-2">Tanggal Kejadian *</label>
+                                <input type="date" id="tanggalKejadian" required 
+                                       class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-transparent transition-all">
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-2">Tanggal Dilaporkan</label>
+                                <input type="date" id="tanggalDilaporkan" 
+                                       class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-transparent transition-all">
+                            </div>
+                        </div>
+                        
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">Jenis Kasus *</label>
+                            <select id="jenisKasus" required 
+                                    class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-transparent transition-all">
+                                <option value="">Pilih Jenis Kasus</option>
+                                <option value="Pelanggaran Tata Tertib">Pelanggaran Tata Tertib</option>
+                                <option value="Keterlambatan">Keterlambatan</option>
+                                <option value="Tidak Masuk Tanpa Keterangan">Tidak Masuk Tanpa Keterangan</option>
+                                <option value="Bullying">Bullying</option>
+                                <option value="Kekerasan">Kekerasan</option>
+                                <option value="Narkoba">Narkoba</option>
+                                <option value="Pencurian">Pencurian</option>
+                                <option value="Lainnya">Lainnya</option>
+                            </select>
+                        </div>
+
+                        <div class="grid md:grid-cols-2 gap-6">
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-2">Nama Pelapor *</label>
+                                <input type="text" id="namaPelapor" required 
+                                       class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-transparent transition-all">
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-2">Status Pelapor</label>
+                                <select id="statusPelapor" 
+                                        class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-transparent transition-all">
+                                    <option value="">Pilih Status</option>
+                                    <option value="Guru">Guru</option>
+                                    <option value="Staff">Staff</option>
+                                    <option value="Siswa">Siswa</option>
+                                    <option value="Orang Tua">Orang Tua</option>
+                                    <option value="Lainnya">Lainnya</option>
+                                </select>
+                            </div>
+                        </div>
+                        
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">Nama Saksi (jika ada)</label>
+                            <textarea id="namaSaksi" rows="2" 
+                                      class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-transparent transition-all"
+                                      placeholder="Tuliskan nama saksi yang melihat kejadian (pisahkan dengan koma)"></textarea>
+                        </div>
+
+
+
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-3">Tindakan BK</label>
+                            <div class="bg-gray-50 p-4 rounded-lg">
+                                <label class="block text-sm font-medium text-gray-700 mb-3">Jenis Layanan *</label>
+                                <div class="grid md:grid-cols-2 gap-3">
+                                    <div class="flex items-center">
+                                        <input type="checkbox" id="konselingIndividual" name="jenisLayananBK" value="Konseling Individual"
+                                               class="h-4 w-4 text-red-600 focus:ring-red-500 border-gray-300 rounded">
+                                        <label for="konselingIndividual" class="ml-2 text-sm text-gray-700">Konseling Individual</label>
+                                    </div>
+                                    <div class="flex items-center">
+                                        <input type="checkbox" id="konselingKelompok" name="jenisLayananBK" value="Konseling Kelompok"
+                                               class="h-4 w-4 text-red-600 focus:ring-red-500 border-gray-300 rounded">
+                                        <label for="konselingKelompok" class="ml-2 text-sm text-gray-700">Konseling Kelompok</label>
+                                    </div>
+                                    <div class="flex items-center">
+                                        <input type="checkbox" id="himpunanData" name="jenisLayananBK" value="Himpunan Data"
+                                               class="h-4 w-4 text-red-600 focus:ring-red-500 border-gray-300 rounded">
+                                        <label for="himpunanData" class="ml-2 text-sm text-gray-700">Himpunan Data</label>
+                                    </div>
+                                    <div class="flex items-center">
+                                        <input type="checkbox" id="bimbinganKelompok" name="jenisLayananBK" value="Bimbingan Kelompok"
+                                               class="h-4 w-4 text-red-600 focus:ring-red-500 border-gray-300 rounded">
+                                        <label for="bimbinganKelompok" class="ml-2 text-sm text-gray-700">Bimbingan Kelompok</label>
+                                    </div>
+                                    <div class="flex items-center">
+                                        <input type="checkbox" id="konsultasi" name="jenisLayananBK" value="Konsultasi"
+                                               class="h-4 w-4 text-red-600 focus:ring-red-500 border-gray-300 rounded">
+                                        <label for="konsultasi" class="ml-2 text-sm text-gray-700">Konsultasi</label>
+                                    </div>
+                                    <div class="flex items-center">
+                                        <input type="checkbox" id="kolaborasi" name="jenisLayananBK" value="Kolaborasi"
+                                               class="h-4 w-4 text-red-600 focus:ring-red-500 border-gray-300 rounded">
+                                        <label for="kolaborasi" class="ml-2 text-sm text-gray-700">Kolaborasi</label>
+                                    </div>
+                                    <div class="flex items-center">
+                                        <input type="checkbox" id="referal" name="jenisLayananBK" value="Referal"
+                                               class="h-4 w-4 text-red-600 focus:ring-red-500 border-gray-300 rounded">
+                                        <label for="referal" class="ml-2 text-sm text-gray-700">Referal</label>
+                                    </div>
+                                    <div class="flex items-center">
+                                        <input type="checkbox" id="advokasi" name="jenisLayananBK" value="Advokasi"
+                                               class="h-4 w-4 text-red-600 focus:ring-red-500 border-gray-300 rounded">
+                                        <label for="advokasi" class="ml-2 text-sm text-gray-700">Advokasi</label>
+                                    </div>
+                                    <div class="flex items-center">
+                                        <input type="checkbox" id="mediasi" name="jenisLayananBK" value="Mediasi"
+                                               class="h-4 w-4 text-red-600 focus:ring-red-500 border-gray-300 rounded">
+                                        <label for="mediasi" class="ml-2 text-sm text-gray-700">Mediasi</label>
+                                    </div>
+                                    <div class="flex items-center">
+                                        <input type="checkbox" id="homeVisit" name="jenisLayananBK" value="Home Visit"
+                                               class="h-4 w-4 text-red-600 focus:ring-red-500 border-gray-300 rounded">
+                                        <label for="homeVisit" class="ml-2 text-sm text-gray-700">Home Visit</label>
+                                    </div>
+                                    <div class="flex items-center">
+                                        <input type="checkbox" id="konferensiKasus" name="jenisLayananBK" value="Konferensi Kasus"
+                                               class="h-4 w-4 text-red-600 focus:ring-red-500 border-gray-300 rounded">
+                                        <label for="konferensiKasus" class="ml-2 text-sm text-gray-700">Konferensi Kasus</label>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+
+                <!-- Deskripsi Kasus -->
+                <div class="border-l-4 border-purple-500 pl-6">
+                    <h2 class="text-xl font-semibold text-gray-800 mb-6 flex items-center">
+                        📝 Deskripsi Kasus
+                    </h2>
+                    <div class="space-y-6">
+                        <!-- Eksplorasi Kasus -->
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">Eksplorasi Kasus</label>
+                            <textarea id="eksplorasiKasus" rows="3" 
+                                      class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-all"
+                                      placeholder="Jelaskan hasil eksplorasi dan investigasi lebih lanjut terhadap kasus..."></textarea>
+                        </div>
+
+                        <!-- Diagnosis Kasus -->
+                        <div class="bg-gray-50 p-4 rounded-lg">
+                            <h3 class="text-lg font-medium text-gray-800 mb-4">📋 Diagnosis Kasus</h3>
+                            <div class="grid md:grid-cols-2 gap-6">
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-700 mb-2">Penyebab Utama</label>
+                                    <textarea id="penyebabUtama" rows="3" 
+                                              class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-all"
+                                              placeholder="Identifikasi penyebab utama dari kasus yang terjadi..."></textarea>
+                                </div>
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-700 mb-3">Identifikasi Kasus</label>
+                                    <div class="space-y-2">
+                                        <div class="flex items-center">
+                                            <input type="checkbox" id="masalahMental" name="identifikasiKasus" value="Masalah Mental"
+                                                   class="h-4 w-4 text-purple-600 focus:ring-purple-500 border-gray-300 rounded">
+                                            <label for="masalahMental" class="ml-2 text-sm text-gray-700">Masalah Mental</label>
+                                        </div>
+                                        <div class="flex items-center">
+                                            <input type="checkbox" id="masalahSosial" name="identifikasiKasus" value="Masalah Sosial"
+                                                   class="h-4 w-4 text-purple-600 focus:ring-purple-500 border-gray-300 rounded">
+                                            <label for="masalahSosial" class="ml-2 text-sm text-gray-700">Masalah Sosial</label>
+                                        </div>
+                                        <div class="flex items-center">
+                                            <input type="checkbox" id="masalahPribadi" name="identifikasiKasus" value="Masalah Pribadi"
+                                                   class="h-4 w-4 text-purple-600 focus:ring-purple-500 border-gray-300 rounded">
+                                            <label for="masalahPribadi" class="ml-2 text-sm text-gray-700">Masalah Pribadi</label>
+                                        </div>
+                                        <div class="flex items-center">
+                                            <input type="checkbox" id="masalahKarir" name="identifikasiKasus" value="Masalah Karir"
+                                                   class="h-4 w-4 text-purple-600 focus:ring-purple-500 border-gray-300 rounded">
+                                            <label for="masalahKarir" class="ml-2 text-sm text-gray-700">Masalah Karir</label>
+                                        </div>
+                                        <div class="flex items-center">
+                                            <input type="checkbox" id="masalahBelajar" name="identifikasiKasus" value="Masalah Belajar"
+                                                   class="h-4 w-4 text-purple-600 focus:ring-purple-500 border-gray-300 rounded">
+                                            <label for="masalahBelajar" class="ml-2 text-sm text-gray-700">Masalah Belajar</label>
+                                        </div>
+                                        <div class="flex items-center">
+                                            <input type="checkbox" id="masalahKeluarga" name="identifikasiKasus" value="Masalah Keluarga"
+                                                   class="h-4 w-4 text-purple-600 focus:ring-purple-500 border-gray-300 rounded">
+                                            <label for="masalahKeluarga" class="ml-2 text-sm text-gray-700">Masalah Keluarga</label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="grid md:grid-cols-2 gap-6">
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-2">Status Kasus</label>
+                                <select id="statusKasus" 
+                                        class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-all">
+                                    <option value="Kasus Baru (Perdana)">Kasus Baru (Perdana)</option>
+                                    <option value="Kasus Kedua">Kasus Kedua</option>
+                                    <option value="Kasus Ketiga">Kasus Ketiga</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-2">Tingkat Prioritas</label>
+                                <select id="tingkatPrioritas" 
+                                        class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-all">
+                                    <option value="Rendah">Rendah</option>
+                                    <option value="Sedang">Sedang</option>
+                                    <option value="Tinggi">Tinggi</option>
+                                    <option value="Sangat Tinggi">Sangat Tinggi</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <!-- Prognosis -->
+                        <div class="bg-blue-50 p-4 rounded-lg">
+                            <h3 class="text-lg font-medium text-gray-800 mb-4">🔮 Prognosis</h3>
+                            <div class="grid md:grid-cols-2 gap-6">
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-700 mb-2">Tindakan yang Diambil Sementara</label>
+                                    <textarea id="tindakanSementara" rows="3" 
+                                              class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-all"
+                                              placeholder="Jelaskan tindakan sementara yang sudah diambil..."></textarea>
+                                </div>
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-700 mb-2">Tindakan Selanjutnya</label>
+                                    <textarea id="tindakanSelanjutnya" rows="3" 
+                                              class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-all"
+                                              placeholder="Jelaskan rencana tindakan selanjutnya..."></textarea>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Hasil dan Laporan -->
+                        <div class="bg-green-50 p-4 rounded-lg">
+                            <h3 class="text-lg font-medium text-gray-800 mb-4">📊 Hasil dan Laporan</h3>
+                            <div class="space-y-6">
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-700 mb-2">LASEG (Laporan Segera)</label>
+                                    <textarea id="laseg" rows="3" 
+                                              class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-all"
+                                              placeholder="Laporan segera mengenai tindakan awal yang telah dilakukan..."></textarea>
+                                </div>
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-700 mb-2">LAJAPEN (Laporan Jangka Pendek)</label>
+                                    <textarea id="lajapen" rows="3" 
+                                              class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-all"
+                                              placeholder="Laporan hasil penanganan dalam jangka pendek..."></textarea>
+                                </div>
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-700 mb-2">LAJAPAN (Laporan Jangka Panjang)</label>
+                                    <textarea id="lajapan" rows="3" 
+                                              class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-all"
+                                              placeholder="Laporan evaluasi dan hasil penanganan dalam jangka panjang..."></textarea>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Buttons -->
+                <div class="space-y-4 pt-6 border-t border-gray-200">
+                    <!-- Main Action Buttons -->
+                    <div class="flex flex-col sm:flex-row gap-4">
+                        <button type="submit" 
+                                class="flex-1 bg-gradient-to-r from-blue-600 to-purple-600 text-white py-3 px-6 rounded-lg font-semibold hover:from-blue-700 hover:to-purple-700 transform hover:scale-105 transition-all duration-200 shadow-lg">
+                            💾 Simpan Kasus
+                        </button>
+                        <button type="button" onclick="resetForm()" 
+                                class="flex-1 bg-gray-500 text-white py-3 px-6 rounded-lg font-semibold hover:bg-gray-600 transform hover:scale-105 transition-all duration-200 shadow-lg">
+                            🔄 Reset Form
+                        </button>
+                    </div>
+                    
+                    <!-- Print Buttons -->
+                    <div class="bg-gray-50 p-4 rounded-lg">
+                        <h3 class="text-lg font-medium text-gray-800 mb-4 flex items-center">
+                            🖨️ Opsi Cetak Laporan
+                        </h3>
+                        
+                        <!-- Basic Print Options -->
+                        <div class="mb-6">
+                            <h4 class="text-md font-medium text-gray-700 mb-3">📋 Laporan Dasar</h4>
+                            <div class="grid sm:grid-cols-3 gap-4">
+                                <button type="button" onclick="printIndividual()" 
+                                        class="bg-green-600 text-white py-3 px-4 rounded-lg font-semibold hover:bg-green-700 transform hover:scale-105 transition-all duration-200 shadow-lg flex items-center justify-center">
+                                    📄 Print Per Individu
+                                </button>
+                                <button type="button" onclick="printPerClass()" 
+                                        class="bg-orange-600 text-white py-3 px-4 rounded-lg font-semibold hover:bg-orange-700 transform hover:scale-105 transition-all duration-200 shadow-lg flex items-center justify-center">
+                                    🏫 Print Per Kelas
+                                </button>
+                                <button type="button" onclick="printCollective()" 
+                                        class="bg-purple-600 text-white py-3 px-4 rounded-lg font-semibold hover:bg-purple-700 transform hover:scale-105 transition-all duration-200 shadow-lg flex items-center justify-center">
+                                    📊 Print Kolektif
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Time-based Print Options -->
+                        <div>
+                            <h4 class="text-md font-medium text-gray-700 mb-3">📅 Laporan Berdasarkan Waktu</h4>
+                            <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
+                                <button type="button" onclick="printByMonth()" 
+                                        class="bg-blue-600 text-white py-3 px-4 rounded-lg font-semibold hover:bg-blue-700 transform hover:scale-105 transition-all duration-200 shadow-lg flex items-center justify-center">
+                                    📆 Print Per Bulan
+                                </button>
+                                <button type="button" onclick="printSemester1()" 
+                                        class="bg-indigo-600 text-white py-3 px-4 rounded-lg font-semibold hover:bg-indigo-700 transform hover:scale-105 transition-all duration-200 shadow-lg flex items-center justify-center">
+                                    🌸 Jan - Juni
+                                </button>
+                                <button type="button" onclick="printSemester2()" 
+                                        class="bg-teal-600 text-white py-3 px-4 rounded-lg font-semibold hover:bg-teal-700 transform hover:scale-105 transition-all duration-200 shadow-lg flex items-center justify-center">
+                                    🍂 Juli - Desember
+                                </button>
+                                <button type="button" onclick="printYearly()" 
+                                        class="bg-red-600 text-white py-3 px-4 rounded-lg font-semibold hover:bg-red-700 transform hover:scale-105 transition-all duration-200 shadow-lg flex items-center justify-center">
+                                    📊 Print 1 Tahun
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+
+        <!-- Success Message -->
+        <div id="successMessage" class="hidden mt-6 bg-green-100 border border-green-400 text-green-700 px-6 py-4 rounded-lg">
+            <div class="flex items-center">
+                <span class="text-2xl mr-3">✅</span>
+                <div>
+                    <strong>Berhasil!</strong> Data kasus siswa telah disimpan.
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Password Protection
+        document.getElementById('passwordForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const password = document.getElementById('passwordInput').value;
+            const correctPassword = '54321';
+            
+            if (password === correctPassword) {
+                // Hide password screen and show main application
+                document.getElementById('passwordScreen').classList.add('hidden');
+                document.getElementById('mainApplication').classList.remove('hidden');
+                
+                // Clear password input for security
+                document.getElementById('passwordInput').value = '';
+            } else {
+                // Show error message
+                document.getElementById('passwordError').classList.remove('hidden');
+                document.getElementById('passwordInput').value = '';
+                document.getElementById('passwordInput').focus();
+                
+                // Hide error after 3 seconds
+                setTimeout(() => {
+                    document.getElementById('passwordError').classList.add('hidden');
+                }, 3000);
+            }
+        });
+
+        // Focus on password input when page loads
+        window.addEventListener('load', function() {
+            document.getElementById('passwordInput').focus();
+        });
+
+        // Allow Enter key to submit password
+        document.getElementById('passwordInput').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                document.getElementById('passwordForm').dispatchEvent(new Event('submit'));
+            }
+        });
+
+        document.getElementById('studentCaseForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Collect form data
+            const formData = {
+                namaLengkap: document.getElementById('namaLengkap').value,
+                nis: document.getElementById('nis').value,
+                kelas: document.getElementById('kelas').value,
+                jenisKelamin: document.getElementById('jenisKelamin').value,
+                namaGuruBK: document.getElementById('namaGuruBK').value,
+                konselorFasilitator: document.getElementById('konselorFasilitator').value,
+                koordinatorBK: document.getElementById('koordinatorBK').value,
+                namaWaliKelas: document.getElementById('namaWaliKelas').value,
+                tanggalKejadian: document.getElementById('tanggalKejadian').value,
+                tanggalDilaporkan: document.getElementById('tanggalDilaporkan').value,
+                jenisKasus: document.getElementById('jenisKasus').value,
+                jenisLayananBK: Array.from(document.querySelectorAll('input[name="jenisLayananBK"]:checked')).map(cb => cb.value),
+                namaPelapor: document.getElementById('namaPelapor').value,
+                statusPelapor: document.getElementById('statusPelapor').value,
+                namaSaksi: document.getElementById('namaSaksi').value,
+                eksplorasiKasus: document.getElementById('eksplorasiKasus').value,
+                penyebabUtama: document.getElementById('penyebabUtama').value,
+                identifikasiKasus: Array.from(document.querySelectorAll('input[name="identifikasiKasus"]:checked')).map(cb => cb.value),
+                tindakanSementara: document.getElementById('tindakanSementara').value,
+                tindakanSelanjutnya: document.getElementById('tindakanSelanjutnya').value,
+                statusKasus: document.getElementById('statusKasus').value,
+                tingkatPrioritas: document.getElementById('tingkatPrioritas').value,
+                laseg: document.getElementById('laseg').value,
+                lajapen: document.getElementById('lajapen').value,
+                lajapan: document.getElementById('lajapan').value,
+                tanggalInput: new Date().toLocaleDateString('id-ID')
+            };
+
+            // Store in localStorage (in real app, this would be sent to server)
+            const existingCases = JSON.parse(localStorage.getItem('studentCases') || '[]');
+            existingCases.push({
+                id: Date.now(),
+                ...formData
+            });
+            localStorage.setItem('studentCases', JSON.stringify(existingCases));
+
+            // Show success message
+            document.getElementById('successMessage').classList.remove('hidden');
+            
+            // Scroll to success message
+            document.getElementById('successMessage').scrollIntoView({ 
+                behavior: 'smooth' 
+            });
+
+            // Hide success message after 5 seconds
+            setTimeout(() => {
+                document.getElementById('successMessage').classList.add('hidden');
+            }, 5000);
+
+            // Reset form
+            this.reset();
+        });
+
+        function resetForm() {
+            document.getElementById('studentCaseForm').reset();
+            document.getElementById('successMessage').classList.add('hidden');
+        }
+
+        // Print Functions
+        function printIndividual() {
+            const cases = JSON.parse(localStorage.getItem('studentCases') || '[]');
+            if (cases.length === 0) {
+                alert('Belum ada data kasus yang tersimpan untuk dicetak.');
+                return;
+            }
+
+            const studentName = prompt('Masukkan nama siswa yang ingin dicetak:');
+            if (!studentName) return;
+
+            const studentCases = cases.filter(c => 
+                c.namaLengkap.toLowerCase().includes(studentName.toLowerCase())
+            );
+
+            if (studentCases.length === 0) {
+                alert('Data siswa tidak ditemukan.');
+                return;
+            }
+
+            generatePrintReport('individual', studentCases, `Laporan Kasus - ${studentName}`);
+        }
+
+        function printPerClass() {
+            const cases = JSON.parse(localStorage.getItem('studentCases') || '[]');
+            if (cases.length === 0) {
+                alert('Belum ada data kasus yang tersimpan untuk dicetak.');
+                return;
+            }
+
+            const className = prompt('Masukkan nama kelas (contoh: 8.2, 9A, 7.1):');
+            if (!className) return;
+
+            const classCases = cases.filter(c => 
+                c.kelas && c.kelas.toLowerCase().includes(className.toLowerCase())
+            );
+
+            if (classCases.length === 0) {
+                alert('Data kasus untuk kelas tersebut tidak ditemukan.');
+                return;
+            }
+
+            generatePrintReport('class', classCases, `Laporan Kasus Kelas ${className}`);
+        }
+
+        function printCollective() {
+            const cases = JSON.parse(localStorage.getItem('studentCases') || '[]');
+            if (cases.length === 0) {
+                alert('Belum ada data kasus yang tersimpan untuk dicetak.');
+                return;
+            }
+
+            generatePrintReport('collective', cases, 'Laporan Kasus Kolektif - Semua Data');
+        }
+
+        function generatePrintReport(type, data, title) {
+            const printWindow = window.open('', '_blank');
+            
+            let reportContent = `
+                <!DOCTYPE html>
+                <html>
+                <head>
+                    <title>${title}</title>
+                    <style>
+                        body { font-family: Arial, sans-serif; margin: 20px; }
+                        .header { text-align: center; margin-bottom: 30px; border-bottom: 2px solid #333; padding-bottom: 10px; }
+                        .case { margin-bottom: 30px; border: 1px solid #ddd; padding: 15px; page-break-inside: avoid; }
+                        .case-header { background: #f5f5f5; padding: 10px; margin: -15px -15px 15px -15px; font-weight: bold; }
+                        .field { margin-bottom: 8px; }
+                        .label { font-weight: bold; display: inline-block; width: 200px; }
+                        .value { display: inline-block; }
+                        .section { margin-top: 15px; }
+                        .section-title { font-weight: bold; color: #333; border-bottom: 1px solid #ccc; padding-bottom: 5px; margin-bottom: 10px; }
+                        @media print { 
+                            .case { page-break-inside: avoid; }
+                            body { margin: 0; }
+                            .table-container { page-break-inside: avoid; }
+                        }
+                        .summary { background: #e8f4fd; padding: 15px; margin-bottom: 20px; border-radius: 5px; }
+                        
+                        /* Table Styles for Collective Report */
+                        .table-container { margin: 20px 0; overflow-x: auto; }
+                        .data-table { 
+                            width: 100%; 
+                            border-collapse: collapse; 
+                            margin: 20px 0; 
+                            font-size: 12px;
+                            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+                        }
+                        .data-table th { 
+                            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); 
+                            color: white; 
+                            padding: 12px 8px; 
+                            text-align: center; 
+                            font-weight: bold;
+                            border: 1px solid #ddd;
+                            font-size: 11px;
+                        }
+                        .data-table td { 
+                            padding: 10px 8px; 
+                            border: 1px solid #ddd; 
+                            text-align: center;
+                            vertical-align: middle;
+                        }
+                        .data-table tr:nth-child(even) { 
+                            background-color: #f9f9f9; 
+                        }
+                        .data-table tr:hover { 
+                            background-color: #f0f8ff; 
+                        }
+                        .priority-tinggi { background-color: #ffebee !important; color: #c62828; font-weight: bold; }
+                        .priority-sedang { background-color: #fff3e0 !important; color: #ef6c00; }
+                        .priority-rendah { background-color: #e8f5e8 !important; color: #2e7d32; }
+                        .priority-sangat-tinggi { background-color: #fce4ec !important; color: #ad1457; font-weight: bold; }
+                        .case-type { 
+                            padding: 4px 8px; 
+                            border-radius: 12px; 
+                            font-size: 10px; 
+                            font-weight: bold;
+                            display: inline-block;
+                        }
+                        .case-bullying { background: #ffcdd2; color: #c62828; }
+                        .case-terlambat { background: #fff3e0; color: #ef6c00; }
+                        .case-alpha { background: #f3e5f5; color: #7b1fa2; }
+                        .case-default { background: #e3f2fd; color: #1565c0; }
+                        .text-left { text-align: left !important; }
+                        .text-wrap { 
+                            max-width: 150px; 
+                            word-wrap: break-word; 
+                            white-space: normal;
+                        }
+                        .summary-stats {
+                            display: grid;
+                            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+                            gap: 15px;
+                            margin: 20px 0;
+                        }
+                        .stat-card {
+                            background: white;
+                            border: 1px solid #ddd;
+                            border-radius: 8px;
+                            padding: 15px;
+                            text-align: center;
+                            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+                        }
+                        .stat-number {
+                            font-size: 24px;
+                            font-weight: bold;
+                            color: #667eea;
+                        }
+                        .stat-label {
+                            font-size: 12px;
+                            color: #666;
+                            margin-top: 5px;
+                        }
+                    </style>
+                </head>
+                <body>
+                    <div class="header">
+                        <h1>${title}</h1>
+                        <p>Tanggal Cetak: ${new Date().toLocaleDateString('id-ID')}</p>
+                        <p style="margin-top: 10px; font-size: 12px; opacity: 0.8;">Dirancang oleh: <strong>Rizki Sukma</strong></p>
+                    </div>
+            `;
+
+            if (type === 'collective' || type === 'class' || type === 'monthly' || type === 'semester1' || type === 'semester2' || type === 'yearly') {
+                // Add summary for collective and time-based reports
+                const totalCases = data.length;
+                const caseTypes = {};
+                const classSummary = {};
+                const prioritySummary = {};
+                
+                data.forEach(c => {
+                    caseTypes[c.jenisKasus] = (caseTypes[c.jenisKasus] || 0) + 1;
+                    classSummary[c.kelas] = (classSummary[c.kelas] || 0) + 1;
+                    prioritySummary[c.tingkatPrioritas] = (prioritySummary[c.tingkatPrioritas] || 0) + 1;
+                });
+
+                // Add time-specific summary for time-based reports
+                let timeSummary = '';
+                if (type === 'monthly' || type === 'semester1' || type === 'semester2' || type === 'yearly') {
+                    const monthlyBreakdown = {};
+                    data.forEach(c => {
+                        if (c.tanggalKejadian) {
+                            const date = new Date(c.tanggalKejadian);
+                            const monthYear = `${date.getMonth() + 1}/${date.getFullYear()}`;
+                            monthlyBreakdown[monthYear] = (monthlyBreakdown[monthYear] || 0) + 1;
+                        }
+                    });
+
+                    const monthNames = ['Jan', 'Feb', 'Mar', 'Apr', 'Mei', 'Jun',
+                                      'Jul', 'Agu', 'Sep', 'Okt', 'Nov', 'Des'];
+                    
+                    timeSummary = `
+                        <div class="section">
+                            <div class="section-title">Distribusi Per Bulan:</div>
+                            ${Object.entries(monthlyBreakdown).map(([monthYear, count]) => {
+                                const [month, year] = monthYear.split('/');
+                                const monthName = monthNames[month - 1];
+                                return `<div class="field"><span class="label">${monthName} ${year}:</span> <span class="value">${count} kasus</span></div>`;
+                            }).join('')}
+                        </div>
+                    `;
+                }
+
+                reportContent += `
+                    <div class="summary">
+                        <h3>📊 Ringkasan Statistik</h3>
+                        <div class="summary-stats">
+                            <div class="stat-card">
+                                <div class="stat-number">${totalCases}</div>
+                                <div class="stat-label">Total Kasus</div>
+                            </div>
+                            <div class="stat-card">
+                                <div class="stat-number">${Object.keys(caseTypes).length}</div>
+                                <div class="stat-label">Jenis Kasus</div>
+                            </div>
+                            <div class="stat-card">
+                                <div class="stat-number">${Object.keys(classSummary).length}</div>
+                                <div class="stat-label">Kelas Terlibat</div>
+                            </div>
+                            <div class="stat-card">
+                                <div class="stat-number">${prioritySummary['Tinggi'] || 0}</div>
+                                <div class="stat-label">Prioritas Tinggi</div>
+                            </div>
+                        </div>
+                        
+                        ${timeSummary}
+                    </div>
+
+                    <div class="table-container">
+                        <h3>📋 Data Kasus Lengkap</h3>
+                        <table class="data-table">
+                            <thead>
+                                <tr>
+                                    <th style="width: 30px;">No</th>
+                                    <th style="width: 120px;">Nama Siswa</th>
+                                    <th style="width: 60px;">Kelas</th>
+                                    <th style="width: 80px;">Tanggal</th>
+                                    <th style="width: 120px;">Jenis Kasus</th>
+                                    <th style="width: 100px;">Pelapor</th>
+                                    <th style="width: 80px;">Prioritas</th>
+                                    <th style="width: 80px;">Status</th>
+                                    <th style="width: 150px;">Tindakan BK</th>
+                                    <th style="width: 120px;">Hasil</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                `;
+
+                data.forEach((caseData, index) => {
+                    // Helper function to get case type class
+                    const getCaseTypeClass = (jenisKasus) => {
+                        if (jenisKasus && jenisKasus.toLowerCase().includes('bullying')) return 'case-bullying';
+                        if (jenisKasus && jenisKasus.toLowerCase().includes('terlambat')) return 'case-terlambat';
+                        if (jenisKasus && jenisKasus.toLowerCase().includes('tidak masuk')) return 'case-alpha';
+                        return 'case-default';
+                    };
+
+                    // Helper function to get priority class
+                    const getPriorityClass = (priority) => {
+                        if (!priority) return '';
+                        const p = priority.toLowerCase();
+                        if (p.includes('sangat tinggi')) return 'priority-sangat-tinggi';
+                        if (p.includes('tinggi')) return 'priority-tinggi';
+                        if (p.includes('sedang')) return 'priority-sedang';
+                        if (p.includes('rendah')) return 'priority-rendah';
+                        return '';
+                    };
+
+                    const formatDate = (dateStr) => {
+                        if (!dateStr) return '-';
+                        const date = new Date(dateStr);
+                        return date.toLocaleDateString('id-ID');
+                    };
+
+                    const truncateText = (text, maxLength = 50) => {
+                        if (!text) return '-';
+                        return text.length > maxLength ? text.substring(0, maxLength) + '...' : text;
+                    };
+
+                    reportContent += `
+                        <tr>
+                            <td>${index + 1}</td>
+                            <td class="text-left"><strong>${caseData.namaLengkap || '-'}</strong></td>
+                            <td>${caseData.kelas || '-'}</td>
+                            <td>${formatDate(caseData.tanggalKejadian)}</td>
+                            <td>
+                                <span class="case-type ${getCaseTypeClass(caseData.jenisKasus)}">
+                                    ${caseData.jenisKasus || '-'}
+                                </span>
+                            </td>
+                            <td class="text-left">${caseData.namaPelapor || '-'}</td>
+                            <td class="${getPriorityClass(caseData.tingkatPrioritas)}">
+                                ${caseData.tingkatPrioritas || '-'}
+                            </td>
+                            <td>${caseData.statusKasus || '-'}</td>
+                            <td class="text-left text-wrap">
+                                ${caseData.jenisLayananBK ? caseData.jenisLayananBK.join(', ') : '-'}
+                            </td>
+                            <td class="text-left text-wrap">
+                                ${truncateText(caseData.laseg || caseData.lajapen || caseData.lajapan)}
+                            </td>
+                        </tr>
+                    `;
+                });
+
+                reportContent += `
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div class="summary" style="margin-top: 30px;">
+                        <h3>📈 Analisis Berdasarkan Kategori</h3>
+                        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px;">
+                            <div>
+                                <h4>🎯 Berdasarkan Jenis Kasus:</h4>
+                                <table class="data-table" style="font-size: 11px;">
+                                    <thead>
+                                        <tr><th>Jenis Kasus</th><th>Jumlah</th><th>Persentase</th></tr>
+                                    </thead>
+                                    <tbody>
+                                        ${Object.entries(caseTypes).map(([type, count]) => 
+                                            `<tr>
+                                                <td class="text-left">${type}</td>
+                                                <td>${count}</td>
+                                                <td>${((count/totalCases)*100).toFixed(1)}%</td>
+                                            </tr>`
+                                        ).join('')}
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div>
+                                <h4>🏫 Berdasarkan Kelas:</h4>
+                                <table class="data-table" style="font-size: 11px;">
+                                    <thead>
+                                        <tr><th>Kelas</th><th>Jumlah</th><th>Persentase</th></tr>
+                                    </thead>
+                                    <tbody>
+                                        ${Object.entries(classSummary).map(([kelas, count]) => 
+                                            `<tr>
+                                                <td>Kelas ${kelas}</td>
+                                                <td>${count}</td>
+                                                <td>${((count/totalCases)*100).toFixed(1)}%</td>
+                                            </tr>`
+                                        ).join('')}
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            }
+
+            data.forEach((caseData, index) => {
+                reportContent += `
+                    <div class="case">
+                        <div class="case-header">Kasus ${index + 1} - ${caseData.namaLengkap}</div>
+                        
+                        <div class="section">
+                            <div class="section-title">Identitas</div>
+                            <div class="field"><span class="label">Nama Lengkap:</span> <span class="value">${caseData.namaLengkap || '-'}</span></div>
+                            <div class="field"><span class="label">NIS/NISN:</span> <span class="value">${caseData.nis || '-'}</span></div>
+                            <div class="field"><span class="label">Kelas:</span> <span class="value">${caseData.kelas || '-'}</span></div>
+                            <div class="field"><span class="label">Jenis Kelamin:</span> <span class="value">${caseData.jenisKelamin || '-'}</span></div>
+                            <div class="field"><span class="label">Guru BK:</span> <span class="value">${caseData.namaGuruBK || '-'}</span></div>
+                            <div class="field"><span class="label">Konselor:</span> <span class="value">${caseData.konselorFasilitator || '-'}</span></div>
+                        </div>
+
+                        <div class="section">
+                            <div class="section-title">Data Kasus</div>
+                            <div class="field"><span class="label">Tanggal Kejadian:</span> <span class="value">${caseData.tanggalKejadian || '-'}</span></div>
+                            <div class="field"><span class="label">Tanggal Dilaporkan:</span> <span class="value">${caseData.tanggalDilaporkan || '-'}</span></div>
+                            <div class="field"><span class="label">Jenis Kasus:</span> <span class="value">${caseData.jenisKasus || '-'}</span></div>
+                            <div class="field"><span class="label">Jenis Layanan BK:</span> <span class="value">${caseData.jenisLayananBK ? caseData.jenisLayananBK.join(', ') : '-'}</span></div>
+                        </div>
+
+                        <div class="section">
+                            <div class="section-title">Pelapor dan Saksi</div>
+                            <div class="field"><span class="label">Nama Pelapor:</span> <span class="value">${caseData.namaPelapor || '-'}</span></div>
+                            <div class="field"><span class="label">Status Pelapor:</span> <span class="value">${caseData.statusPelapor || '-'}</span></div>
+                            <div class="field"><span class="label">Saksi:</span> <span class="value">${caseData.namaSaksi || '-'}</span></div>
+                        </div>
+
+                        <div class="section">
+                            <div class="section-title">Penanganan</div>
+                            <div class="field"><span class="label">Eksplorasi Kasus:</span> <span class="value">${caseData.eksplorasiKasus || '-'}</span></div>
+                            <div class="field"><span class="label">Penyebab Utama:</span> <span class="value">${caseData.penyebabUtama || '-'}</span></div>
+                            <div class="field"><span class="label">Identifikasi:</span> <span class="value">${caseData.identifikasiKasus ? caseData.identifikasiKasus.join(', ') : '-'}</span></div>
+                            <div class="field"><span class="label">Status Kasus:</span> <span class="value">${caseData.statusKasus || '-'}</span></div>
+                            <div class="field"><span class="label">Prioritas:</span> <span class="value">${caseData.tingkatPrioritas || '-'}</span></div>
+                        </div>
+
+                        <div class="section">
+                            <div class="section-title">Laporan</div>
+                            <div class="field"><span class="label">LASEG:</span> <span class="value">${caseData.laseg || '-'}</span></div>
+                            <div class="field"><span class="label">LAJAPEN:</span> <span class="value">${caseData.lajapen || '-'}</span></div>
+                            <div class="field"><span class="label">LAJAPAN:</span> <span class="value">${caseData.lajapan || '-'}</span></div>
+                        </div>
+                    </div>
+                `;
+            });
+
+            reportContent += `
+                </body>
+                </html>
+            `;
+
+            printWindow.document.write(reportContent);
+            printWindow.document.close();
+            
+            setTimeout(() => {
+                printWindow.print();
+            }, 500);
+        }
+
+        // Time-based Print Functions
+        function printByMonth() {
+            const cases = JSON.parse(localStorage.getItem('studentCases') || '[]');
+            if (cases.length === 0) {
+                alert('Belum ada data kasus yang tersimpan untuk dicetak.');
+                return;
+            }
+
+            const monthYear = prompt('Masukkan bulan dan tahun (format: MM/YYYY, contoh: 03/2024):');
+            if (!monthYear) return;
+
+            const [month, year] = monthYear.split('/');
+            if (!month || !year || month < 1 || month > 12) {
+                alert('Format tidak valid. Gunakan format MM/YYYY (contoh: 03/2024)');
+                return;
+            }
+
+            const monthCases = cases.filter(c => {
+                if (!c.tanggalKejadian) return false;
+                const caseDate = new Date(c.tanggalKejadian);
+                return caseDate.getMonth() + 1 == month && caseDate.getFullYear() == year;
+            });
+
+            if (monthCases.length === 0) {
+                alert('Tidak ada data kasus untuk bulan dan tahun tersebut.');
+                return;
+            }
+
+            const monthNames = ['Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni',
+                              'Juli', 'Agustus', 'September', 'Oktober', 'November', 'Desember'];
+            const monthName = monthNames[month - 1];
+            
+            generatePrintReport('monthly', monthCases, `Laporan Kasus Bulan ${monthName} ${year}`);
+        }
+
+        function printSemester1() {
+            const cases = JSON.parse(localStorage.getItem('studentCases') || '[]');
+            if (cases.length === 0) {
+                alert('Belum ada data kasus yang tersimpan untuk dicetak.');
+                return;
+            }
+
+            const year = prompt('Masukkan tahun (contoh: 2024):');
+            if (!year) return;
+
+            const semester1Cases = cases.filter(c => {
+                if (!c.tanggalKejadian) return false;
+                const caseDate = new Date(c.tanggalKejadian);
+                const month = caseDate.getMonth() + 1;
+                return caseDate.getFullYear() == year && month >= 1 && month <= 6;
+            });
+
+            if (semester1Cases.length === 0) {
+                alert('Tidak ada data kasus untuk periode Januari-Juni tahun tersebut.');
+                return;
+            }
+
+            generatePrintReport('semester1', semester1Cases, `Laporan Kasus Semester 1 (Januari - Juni ${year})`);
+        }
+
+        function printSemester2() {
+            const cases = JSON.parse(localStorage.getItem('studentCases') || '[]');
+            if (cases.length === 0) {
+                alert('Belum ada data kasus yang tersimpan untuk dicetak.');
+                return;
+            }
+
+            const year = prompt('Masukkan tahun (contoh: 2024):');
+            if (!year) return;
+
+            const semester2Cases = cases.filter(c => {
+                if (!c.tanggalKejadian) return false;
+                const caseDate = new Date(c.tanggalKejadian);
+                const month = caseDate.getMonth() + 1;
+                return caseDate.getFullYear() == year && month >= 7 && month <= 12;
+            });
+
+            if (semester2Cases.length === 0) {
+                alert('Tidak ada data kasus untuk periode Juli-Desember tahun tersebut.');
+                return;
+            }
+
+            generatePrintReport('semester2', semester2Cases, `Laporan Kasus Semester 2 (Juli - Desember ${year})`);
+        }
+
+        function printYearly() {
+            const cases = JSON.parse(localStorage.getItem('studentCases') || '[]');
+            if (cases.length === 0) {
+                alert('Belum ada data kasus yang tersimpan untuk dicetak.');
+                return;
+            }
+
+            const year = prompt('Masukkan tahun (contoh: 2024):');
+            if (!year) return;
+
+            const yearlyCases = cases.filter(c => {
+                if (!c.tanggalKejadian) return false;
+                const caseDate = new Date(c.tanggalKejadian);
+                return caseDate.getFullYear() == year;
+            });
+
+            if (yearlyCases.length === 0) {
+                alert('Tidak ada data kasus untuk tahun tersebut.');
+                return;
+            }
+
+            generatePrintReport('yearly', yearlyCases, `Laporan Kasus Tahunan ${year}`);
+        }
+
+        // Set default date to today
+        document.getElementById('tanggalKejadian').valueAsDate = new Date();
+    </script>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'985808f9113617f8',t:'MTc1ODk0NTAwOC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>
